@@ -1,0 +1,103 @@
+LV1
+package main
+import "fmt"
+func add(x int, y int) int {
+	return x + y
+}
+func main() {
+	result := add(3, 5)
+	fmt.Println(result)
+}
+
+LV2
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func CaculateArea(r float32) float32 {
+	return math.Pi * math.Pi * r
+}
+
+func main() {
+	var radius float32
+	fmt.Print("请输入圆的半径")
+	fmt.Scan(&radius)
+	fmt.Print("圆的面积是:", CaculateArea(radius))
+}
+
+LV3
+package main
+
+import (
+	"fmt"
+)
+
+func IsPrime(num int) bool {
+	if num <= 1 {
+		return false
+	}
+
+	for i := 2; i*i <= num; i++ {
+		if num%i == 0 {
+			return false
+		}
+	}
+
+	return true
+}
+
+func main() {
+	var num int
+	fmt.Print("请输入num")
+	fmt.Scan(&num)
+	if IsPrime(num) {
+		fmt.Printf("%d 是素数\n", num)
+	} else {
+		fmt.Printf("%d 不是素数\n", num)
+	}
+
+}
+LVX
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func BinarySearch(array []int, target int) bool {
+	low := 0
+	high := len(array) - 1
+	for low <= high {
+		mid := (low + high) / 2
+		if array[mid] < target {
+			low = mid + 1
+		} else if array[mid] > target {
+			high = mid - 1
+		} else {
+			return true
+		}
+	}
+	return false
+}
+
+func main() {
+	array := make([]int, 100)
+	for i := 0; i < 100; i++ {
+		array[i] = i
+	}
+	rand.Seed(time.Now().Unix())
+	target := rand.Intn(100)
+	result := BinarySearch(array, target)
+	if result {
+		fmt.Printf("找到了目标%d\n", target)
+	} else {
+		fmt.Printf("没有找到目标%d\n", target)
+	}
+}
+完成情况：1.在1-100中随机选择一个数，并用二分法查找到
+          2.通过rand.Seed(time.Now().Unix())返回当前时间的秒数，以此满足每次生成不同的随机数
